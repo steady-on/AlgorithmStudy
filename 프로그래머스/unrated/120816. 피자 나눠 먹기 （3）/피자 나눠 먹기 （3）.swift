@@ -1,9 +1,3 @@
 import Foundation
 
-func solution(_ slice:Int, _ n:Int) -> Int {
-    var answer = 1
-    while slice * answer < n {
-        answer += 1
-    }
-    return answer
-}
+func solution(_ slice:Int, _ n:Int) -> Int { n/slice + (n % slice > 0 ? 1 : 0) }
