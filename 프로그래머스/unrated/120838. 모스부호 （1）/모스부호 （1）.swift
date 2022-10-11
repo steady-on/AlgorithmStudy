@@ -9,5 +9,5 @@ func solution(_ letter:String) -> String {
     "-.--":"y","--..":"z"
     ]
 
-    return letter.split(separator: " ").map { morse[String($0)]! }.reduce("", +)
+    return letter.split(separator: " ").map { morse[String($0)]! }.joined()
 }
