@@ -1,7 +1,7 @@
 import Foundation
 
 func solution(_ n:Int) -> Int {
-    let range = (1...n).reversed()
+    let range = Array(1...n)
     var count = 0
     
     for num in range {
