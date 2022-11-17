@@ -1,12 +1,11 @@
 import Foundation
 
 func solution(_ n:Int) -> Int {
-    let range = Array(1...n)
     var count = 0
     
-    for num in range {
+    for num in 1...n {
         var tempCount = 0
-        for i in (1...num).reversed() {
+        for i in 1...num {
             if num % i == 0 {
                 tempCount += 1
             }
