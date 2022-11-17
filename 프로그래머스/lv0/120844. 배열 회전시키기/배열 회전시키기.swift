@@ -1,9 +1,13 @@
 import Foundation
 
-func solution(_ numbers:[Int], _ direction:String) -> [Int] { 
+func solution(_ numbers:[Int], _ direction:String) -> [Int] {
+    var numbers: [Int] = numbers
+    
     if direction == "right" {
-        return (-1..<numbers.count-1).map { numbers[(($0 + numbers.count)%numbers.count)] }
+        numbers.insert(numbers.removeLast(), at: 0)
     } else {
-        return (0..<numbers.count).map { numbers[(($0 + 1)%numbers.count)] } 
+        numbers.append(numbers.removeFirst())
     }
+    
+    return numbers
 }
