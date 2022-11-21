@@ -6,8 +6,9 @@ func solution(_ numbers:String) -> Int64 {
     var numbers = numbers
 
     for (idx, value) in str.enumerated() {
-        numbers = numbers.components(separatedBy: value).joined(separator: "\(idx)")
+        numbers = numbers.replacingOccurrences(of: value, with: "\(idx)")
     }
     
     return Int64(numbers)!
 }
+
