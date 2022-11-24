@@ -6,7 +6,6 @@ func solution(_ quiz:[String]) -> [String] {
     
     for quest in quiz {
         var temp: String = ""
-        // let (x, y) = (Int(quest[0])!, Int(quest[2])!)
         
         if let x = Int(quest[0]), let y = Int(quest[2]) {
             if quest[1] == "+" {
