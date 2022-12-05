@@ -7,21 +7,13 @@ func solution(_ keyinput:[String], _ board:[Int]) -> [Int] {
     for key in keyinput {
         switch key {
             case "right":
-                if x < board[0]/2 {
-                    x += 1
-                }
+                (x < board[0]/2) ? (x += 1) : (x += 0)
             case "left":
-                if x > -board[0]/2 {
-                    x -= 1
-                }
+                (x > -board[0]/2) ? (x -= 1) : (x -= 0)
             case "up":
-                if y < board[1]/2 {
-                    y += 1
-                }
+                (y < board[1]/2) ? (y += 1) : (y += 0)
             case "down":
-                if y > -board[1]/2 {
-                    y -= 1
-                }
+                (y > -board[1]/2) ? (y -= 1) : (y -= 0)
             default:
                 break
         }
