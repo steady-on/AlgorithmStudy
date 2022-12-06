@@ -1,17 +1,9 @@
 import Foundation
 
 func solution(_ myString:String) -> Int {
-    var replace = ""
+    var myString: String = myString.map { $0.isNumber ? String($0) : "a"}.joined()
     
-    for char in myString {
-        if char.isNumber {
-            replace.append(char)
-        } else {
-            replace.append("a")
-        }
-    }
-    
-    let numbers = replace.components(separatedBy: "a").compactMap { Int($0) }.reduce(0, +)
+    let numbers = myString.components(separatedBy: "a").compactMap { Int($0) }.reduce(0, +)
     
     return numbers
 }
