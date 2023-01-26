@@ -1,6 +1,6 @@
 import Foundation
 
-let n = Int(readLine()!)!
+let _ = readLine()
 let A = Set(readLine()!.components(separatedBy: " "))
 let _ = readLine()
 let B = readLine()!.components(separatedBy: " ")
