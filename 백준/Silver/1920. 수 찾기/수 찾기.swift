@@ -1,9 +1,7 @@
-import Foundation
-
 let _ = readLine()
-let A = Set(readLine()!.components(separatedBy: " "))
+let A = Set(readLine()!.split(separator: " "))
 let _ = readLine()
-let B = readLine()!.components(separatedBy: " ")
+let B = readLine()!.split(separator: " ")
 
 for num in B {
     if A.contains(num) {
