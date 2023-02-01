@@ -4,7 +4,7 @@ func solution(_ cipher:String, _ code:Int) -> String {
     var result:String = ""
     var cipher = Array(cipher)
     
-    for i in 0..<cipher.count {
+    for i in cipher.indices {
         if (i + 1) % code == 0 {
             result.append(cipher[i])
         }
