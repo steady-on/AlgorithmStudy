@@ -1,16 +1,20 @@
 import Foundation
 
-func solution(_ myString:String) -> Int {
-    let myString = myString.components(separatedBy: " ")
-    var result: Int = Int(myString[0])!
+func solution(_ myString:String) -> Int { //"3 + 4"
+    let myStrings = myString.components(separatedBy: " ")
+    var result: Int = Int(myStrings[0])!
     
-    for index in stride(from:1, to:myString.count, by: 2) {
-        if myString[index] == "+" {
-            result += Int(myString[index + 1])!
+    // 홀수번째는 연산자, 짝수번째는 숫자
+    // +- myStrings[i+1]
+    var idx: Int = 1
+    while idx < myStrings.count {
+        if myStrings[idx] == "+"  {
+            result += Int(myStrings[idx+1])!
         } else {
-            result -= Int(myString[index + 1])!
+            result -= Int(myStrings[idx+1])!
         }
+        idx += 2
     }
-    
+
     return result
 }
