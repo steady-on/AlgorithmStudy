@@ -4,11 +4,11 @@ func solution(_ numList:[Int]) -> Int {
     var odd: String = ""
     var even: String = ""
     
-    for num in numList {
-        if num % 2 == 0 {
-            even += String(num)
+    numList.forEach {
+        if $0 % 2 == 0 {
+            even += String($0)
         } else {
-            odd += String(num)
+            odd += String($0)
         }
     }
     
