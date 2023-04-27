@@ -1,16 +1,8 @@
 import Foundation
 
 func solution(_ numList:[Int]) -> [Int] {
-    var numList = numList
-    let suffix = numList.suffix(2)
-    
-    guard let first = suffix.first, let last = suffix.last else { return [] }
-    
-    if last > first {
-        numList.append(last - first)
-    } else {
-        numList.append(last * 2)
-    }
-     
-    return numList
+    let last = numList[numList.count - 1]
+    let before = numList[numList.count - 2]
+ 
+    return numList + [last > before ? last - before : last * 2]
 }
