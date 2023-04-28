@@ -4,9 +4,9 @@ func solution(_ l:Int, _ r:Int) -> [Int] {
     var result: [Int] = []
     
     for i in l...r {
-        let temp = Array(String(i)).filter { $0 != "5" && $0 != "0" }
-        if temp.isEmpty { result.append(i) }
+        let temp = Set(String(i)).isSubset(of: ["5", "0"])
+        if temp { result.append(i) }
     }
     
-    return result.isEmpty ? [-1] : result.sorted()
+    return result.isEmpty ? [-1] : result
 }
