@@ -1,3 +1,3 @@
 import Foundation
 
-func solution(_ start:Int, _ end:Int) -> [Int] { Array(stride(from: start, through: end, by: -1)) }
+func solution(_ start:Int, _ end:Int) -> [Int] { (end...start).reversed() }
