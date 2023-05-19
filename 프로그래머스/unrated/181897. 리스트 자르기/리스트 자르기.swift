@@ -11,6 +11,6 @@ func solution(_ n:Int, _ slicer:[Int], _ numList:[Int]) -> [Int] {
     case 3:
         return Array(numList[a...b])
     default:
-        return numList[a...b].enumerated().filter { $0.offset % c == 0 }.map { $0.element }
+        return stride(from: a, through: b, by: c).map { numList[$0] }
     }
 }
