@@ -1,15 +1,3 @@
 import Foundation
 
-func solution(_ strArr:[String]) -> Int {
-    var result = [Int: Int]()
-    
-    for str in strArr {
-        if result[str.count] != nil {
-            result[str.count]! += 1
-        } else {
-            result[str.count] = 1
-        }
-    }
-    
-    return result.values.max()!
-}
+func solution(_ strArr:[String]) -> Int { Dictionary(grouping: strArr, by: { $0.count }).values.map { $0.count }.max()! }
