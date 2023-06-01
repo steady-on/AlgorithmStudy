@@ -7,12 +7,13 @@ enum Bonus: String {
 enum Option: String {
     case star = "*"
     case hashtag = "#"
+    case none = ""
 }
 
 struct Chance {
     let point: Int
     let bonus: Bonus
-    var option: Option? = nil
+    var option: Option
     
     var score: Int {
         var sum = 0
@@ -23,11 +24,10 @@ struct Chance {
         case .t: sum = point * point * point
         }
         
-        if let option = self.option {
-            switch option {
-            case .star: sum *= 2
-            case .hashtag: sum *= (-1)
-            }
+        switch option {
+        case .star: sum *= 2
+        case .hashtag: sum *= (-1)
+        case .none: sum *= 1
         }
         
         return sum
@@ -35,32 +35,24 @@ struct Chance {
 }
 
 func convertStringToChance(_ dartResult: String) -> [Chance] {
-    var resultCharacters = Array(dartResult)
+    let points = dartResult.split { $0.isLetter || $0 == "*" || $0 == "#" }.compactMap { Int($0) }
+    let bonusAndOption = dartResult.split { $0.isNumber }
     var chances = [Chance]()
     
-    var point = ""
-    while resultCharacters.isEmpty == false {
-        let temp = resultCharacters.removeFirst()
+    for (point, str) in zip(points, bonusAndOption) {
+        var bonus: Bonus
+        var option = Option.none
         
-        if temp.isNumber {
-            point.append(temp)
-            if temp == Character("1") && resultCharacters[0].isNumber {
-                point.append(resultCharacters.removeFirst())
-            }
+        if str.count == 1 {
+            bonus = Bonus(rawValue: String(str))!
         } else {
-            let bonus = Bonus(rawValue: String(temp))!
-            var chance = Chance(point: Int(point)!, bonus: bonus)
-            
-            if resultCharacters.isEmpty == false && resultCharacters[0].isPunctuation {
-                let option = Option(rawValue: String(resultCharacters.removeFirst()))
-                chance.option = option
-            }
-            
-            chances.append(chance)
-            point = ""
+            bonus = Bonus(rawValue: String(str.first!))!
+            option = Option(rawValue: String(str.last!))!
         }
+        
+        chances.append(Chance(point: point, bonus: bonus, option: option))
     }
-    
+
     return chances
 }
 
