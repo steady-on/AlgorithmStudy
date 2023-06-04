@@ -18,14 +18,7 @@ struct PersonalityTypeTest {
     lazy var testResult = String([judgeRvsT, judgeCvsF, judgeJvsM, judgeAvsN])
     
     mutating func calculateScore(_ question: String, _ choice: Int) {
-        var score: Int {
-            switch choice {
-            case 3, 5: return 1
-            case 2, 6: return 2
-            case 1, 7: return 3
-            default: return 0
-            }
-        }
+        let score = abs(choice - 4)
         
         switch question {
         case "RT":
