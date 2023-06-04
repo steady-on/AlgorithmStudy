@@ -1,16 +1,16 @@
 import Foundation
 
 func solution(_ players:[String], _ callings:[String]) -> [String] {
-    var playersKey = Dictionary(uniqueKeysWithValues: zip(players, Array(1...players.count))) // 이름:등수
-    var ranksKey = Dictionary(uniqueKeysWithValues: zip(Array(1...players.count), players)) // 등수:이름
+    var players = players
+    var ranks = Dictionary(uniqueKeysWithValues: zip(players, 0..<players.count)) // 이름:인덱스
     
     for call in callings {
-        let presentRank = playersKey[call]! // 현재등수
-        let prePlayer = ranksKey[presentRank - 1]! // 앞사람
-        // 각 딕셔너리에서 call의 앞사람이랑 등수/이름 바꿔줌
-        (playersKey[prePlayer], playersKey[call]) = (presentRank, presentRank-1)
-        (ranksKey[presentRank], ranksKey[presentRank-1]) = (prePlayer, call)
+        let presentIndex = ranks[call]! // 현재 등수
+        let prePlayer = players[presentIndex - 1] // 앞의 플레이어
+        
+        players.swapAt(presentIndex, presentIndex-1)
+        (ranks[call], ranks[prePlayer]) = (presentIndex-1, presentIndex)
     }
- 
-    return ranksKey.sorted { $0.key < $1.key }.map { $0.value }
+
+    return players
 }
