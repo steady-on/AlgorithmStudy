@@ -13,34 +13,26 @@ func solution(_ n:Int) -> [[Int]] {
         value += 1
         
         switch direction % 4 {
-        case 0: // right
-            if row < n-1 && result[col][row+1] == 0 {
-                row = (row + 1) % n
-            } else {
-                direction += 1
-                col = (col + 1) % n
-            }
-        case 1: // down
-            if col < n-1 && result[col+1][row] == 0 {
-                col = (col + 1) % n
-            } else {
-                direction += 1
-                row = (row - 1) % n
-            }
-        case 2: // left
-            if row > 0 && result[col][row-1] == 0 {
-                row = (row - 1) % n
-            } else {
-                direction += 1
-                col = (col - 1) % n
-            }
-        default: // up
-            if col > 0 && result[col-1][row] == 0 {
-                col = (col - 1) % n
-            } else {
-                direction += 1
-                row = (row + 1) % n
-            }
+        case 0 where row < n-1 && result[col][row+1] == 0: // right
+            row += 1
+        case 0:
+            direction += 1
+            col += 1
+        case 1 where col < n-1 && result[col+1][row] == 0: // down
+                col += 1
+        case 1:
+            direction += 1
+            row -= 1
+        case 2 where row > 0 && result[col][row-1] == 0: // left
+            row -= 1
+        case 2:
+            direction += 1
+            col -= 1
+        case 3 where col > 0 && result[col-1][row] == 0: // up
+            col -= 1
+        default: 
+            direction += 1
+            row += 1
         }
     }
     
