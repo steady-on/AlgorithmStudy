@@ -6,9 +6,7 @@ func solution(_ cacheSize:Int, _ cities:[String]) -> Int {
     for city in cities {
         guard cache.contains(city) == false else {
             runTime += 1
-            if let index = cache.firstIndex(of: city) {
-                cache.remove(at: index)
-            }
+            cache.remove(at: cache.firstIndex(of: city)!)
             cache.append(city)
             continue
         }
@@ -16,9 +14,7 @@ func solution(_ cacheSize:Int, _ cities:[String]) -> Int {
         cache.append(city)
         runTime += 5
         
-        if cache.count > cacheSize {
-            cache.removeFirst()
-        }
+        if cache.count > cacheSize { cache.removeFirst() }
     }
     
     return runTime
