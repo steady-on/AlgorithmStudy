@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 16.3 MB, 시간: 0.04 ms
+메모리: 16.1 MB, 시간: 0.04 ms
 
 ### 구분
 
@@ -25,7 +25,7 @@ Empty
 <li><code>mode</code>가 0일 때 
 
 <ul>
-<li><code>code[idx]</code>가 "1"이 아니면 <code>idx</code>가 짝수일 때만 <code>ret</code>의 <code>code[idx]</code>를 추가합니다.</li>
+<li><code>code[idx]</code>가 "1"이 아니면 <code>idx</code>가 짝수일 때만 <code>ret</code>의 맨 뒤에 <code>code[idx]</code>를 추가합니다.</li>
 <li><code>code[idx]</code>가 "1"이면 <code>mode</code>를 0에서 1로 바꿉니다.</li>
 </ul></li>
 <li><code>mode</code>가 1일 때
@@ -153,6 +153,8 @@ Empty
 </tbody>
       </table>
 <p>따라서 "acbac"를 return 합니다.</p>
+
+<p>※ 2023년 05월 18일 지문이 수정되었습니다.</p>
 
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges
