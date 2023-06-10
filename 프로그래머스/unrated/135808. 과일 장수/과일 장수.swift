@@ -1,14 +1,11 @@
 import Foundation
 
 func solution(_ k: Int, _ m: Int, _ score: [Int]) -> Int {
-    var sortedScore = score.sorted()
+    var sortedScore = score.sorted(by: >)
     var profit = 0
     
-    var index = sortedScore.count
-    while index >= m {
-        let box = Array(sortedScore[(index-m) ..< index])
-        profit += box[0] * m
-        index -= m
+    for index in stride(from: m-1, to: sortedScore.count, by: m) {
+        profit += sortedScore[index] * m
     }
     
     return profit
