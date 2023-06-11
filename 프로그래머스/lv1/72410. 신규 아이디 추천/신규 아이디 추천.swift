@@ -1,13 +1,5 @@
 import Foundation
 
-func verifyId(_ id: String) -> Bool {
-    let isCorrectLength = id.count >= 3 && id.count <= 15
-    let isConsistOfCorrectCharacter = id.split { $0.isLowercase || $0.isNumber || ["-", "_", "."].contains(String($0)) }.filter { $0 != "" }.count == 0
-    let isCorrectUsingPeriod = (id.hasPrefix(".") || id.hasSuffix(".") || id.contains("..")) == false
-    
-    return isCorrectLength && isConsistOfCorrectCharacter && isCorrectUsingPeriod
-}
-
 func makeRecommandId(_ id: String) -> String {
     let allowedCharacters = Dictionary(uniqueKeysWithValues: zip(Array("abcdefghijklmnopqrstuvwxyz0123456789-_."), Array(repeating: true, count: 39)))
     var recommandId = String()
@@ -33,7 +25,6 @@ func makeRecommandId(_ id: String) -> String {
 }
 
 func solution(_ newId:String) -> String {    
-    guard verifyId(newId) == false else { return newId }
     let recommandId = makeRecommandId(newId)
 
     return recommandId
