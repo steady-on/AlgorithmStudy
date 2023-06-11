@@ -19,18 +19,18 @@ func rememberKeymapping(_ keymap: [String]) -> [Character:Int] {
 
 func solution(_ keymap:[String], _ targets:[String]) -> [Int] {
     let remember = rememberKeymapping(keymap)
-    var result = [Int]()    
+    var result = [Int]()
 
     TargetLoop: for target in targets {
         var count = 0
         
         for char in target {
-            if let numberOfPress = remember[char] {
-                count += numberOfPress
-            } else {
+            guard let numberOfPress = remember[char] else { 
                 result.append(-1)
                 continue TargetLoop
             }
+
+            count += numberOfPress
         }
         
         result.append(count)
