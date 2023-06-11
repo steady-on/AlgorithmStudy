@@ -1,20 +1,17 @@
 import Foundation
 
 func solution(_ n:Int, _ lost:[Int], _ reserve:[Int]) -> Int {
-    var landables = Set(reserve)
-    var realLost = Set(lost)
+    var landables = reserve.filter { lost.contains($0) == false }.sorted()
+    var realLost = lost.filter { reserve.contains($0) == false }
     
-    landables.subtract(lost)
-    realLost.subtract(reserve)
-    
-    for student in landables.sorted() {
-        if realLost.contains(student - 1) {
-            realLost.remove(student - 1)
+    for student in landables {
+        if let before = realLost.firstIndex(of: student - 1) {
+            realLost.remove(at: before)
             continue
         }
         
-        if realLost.contains(student + 1) {
-            realLost.remove(student + 1)
+        if let after = realLost.firstIndex(of: student + 1) {
+            realLost.remove(at: after)
         }
     }
     
