@@ -21,13 +21,13 @@ func solution(_ keymap:[String], _ targets:[String]) -> [Int] {
     let remember = rememberKeymapping(keymap)
     var result = [Int]()
 
-    TargetLoop: for target in targets {
+    for target in targets {
         var count = 0
         
         for char in target {
             guard let numberOfPress = remember[char] else { 
-                result.append(-1)
-                continue TargetLoop
+                count = -1
+                break
             }
 
             count += numberOfPress
