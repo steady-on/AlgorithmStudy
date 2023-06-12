@@ -1,10 +1,10 @@
 # [unrated] 덧칠하기 - 161989 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/161989#) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/161989) 
 
 ### 성능 요약
 
-메모리: 18.8 MB, 시간: 42.43 ms
+메모리: 18.5 MB, 시간: 4.71 ms
 
 ### 구분
 

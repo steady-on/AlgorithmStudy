@@ -1,16 +1,14 @@
 import Foundation
 
 func solution(_ n:Int, _ m:Int, _ section:[Int]) -> Int {
-    var wall = Dictionary(uniqueKeysWithValues: zip(section, Array(repeating: true, count: section.count)))
+    var rePaintedWall = section
+    var end = 0
     var count = 0
     
     for start in section {
-        guard wall[start] != nil else { continue }
+        guard start >= end else { continue }
         
-        for num in start..<(start+m) where wall[num] != nil {
-            wall[num] = nil
-        }
-        
+        end = start + m
         count += 1
     }
     
