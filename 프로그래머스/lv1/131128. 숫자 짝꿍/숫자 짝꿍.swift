@@ -1,19 +1,27 @@
 import Foundation
 
 func findCommonNumbers(_ x: String, _ y: String) -> [String] {
-    let x = x.map { String($0) }
-    let y = y.map { String($0) }
-    var xDict = [String:Int]()
-    var yDict = [String:Int]()
+    var xCount = Array(repeating: 0, count: 10)
+    var yCount = Array(repeating: 0, count: 10)
     var commonNumbers = [String]()
     
-    x.forEach { xDict[$0, default: 0] += 1 }
-    y.forEach { yDict[$0, default: 0] += 1 }
+    for char in x {
+        let index = Int(String(char))!
+        xCount[index] += 1
+    }
     
-    for (num, xNum) in xDict {
-        guard let yNum = yDict[num] else { continue }
+    for char in y {
+        let index = Int(String(char))!
+        yCount[index] += 1
+    }
+    
+    for (index, xNum) in xCount.enumerated() {
+        let yNum = yCount[index]
         
-        commonNumbers += Array(repeating: num, count: (xNum <= yNum ? xNum : yNum))
+        guard xNum != 0 && yNum != 0 else { continue }
+        
+        let min = xNum <= yNum ? xNum : yNum
+        commonNumbers += Array(repeating: "\(index)", count: min)
     }
     
     return commonNumbers
@@ -21,7 +29,7 @@ func findCommonNumbers(_ x: String, _ y: String) -> [String] {
 
 func makePairNumber(_ nums: [String]) -> String {
     guard nums.isEmpty == false else { return "-1" }
-    guard Set(nums) != Set(["0"]) else { return "0" }
+    guard Set(nums) != ["0"] else { return "0" }
     
     return nums.sorted(by: >).joined()
 }
