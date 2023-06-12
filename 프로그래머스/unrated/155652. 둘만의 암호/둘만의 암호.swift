@@ -5,10 +5,9 @@ func solution(_ s:String, _ skip:String, _ index:Int) -> String {
     var result = ""
     
     for char in s {
-        if let before = keys.firstIndex(of: char) {
-            let convertIndex = (before + index) % keys.count
-            result.append(keys[convertIndex])
-        }
+        let before = keys.firstIndex(of: char)!
+        let convertIndex = (before + index) % keys.count
+        result.append(keys[convertIndex])
     }
     
     return result
