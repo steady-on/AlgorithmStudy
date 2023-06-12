@@ -1,8 +1,7 @@
 import Foundation
 
 func solution(_ s:String, _ skip:String, _ index:Int) -> String {
-    let alphabets = Array("abcdefghijklmnopqrstuvwxyz")
-    let keys = alphabets.filter { skip.contains($0) == false }
+    let keys = Array("abcdefghijklmnopqrstuvwxyz").filter { skip.contains($0) == false }
     var result = ""
     
     for char in s {
