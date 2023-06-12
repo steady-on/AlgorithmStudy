@@ -2,7 +2,6 @@ import Foundation
 
 func solution(_ cap:Int, _ n:Int, _ deliveries:[Int], _ pickups:[Int]) -> Int64 {
     var totalDistance: Int64 = 0
-    
     var index = n - 1
     var delieverRemain = 0
     var pickupRemain = 0
