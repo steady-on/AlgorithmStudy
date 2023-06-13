@@ -8,9 +8,7 @@ func solution(_ s:String) -> Int {
         if i != "Z" {
             result.append(i)
         } else {
-            // if !result.isEmpty {
-                result.removeLast()
-            // }
+            result.removeLast()
         }
     }
     
