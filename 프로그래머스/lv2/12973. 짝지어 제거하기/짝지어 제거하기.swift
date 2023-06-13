@@ -4,17 +4,12 @@ func solution(_ s: String) -> Int{
     var stack = [Character]()
     
     for char in s {
-        guard let last = stack.last else {
+        guard let last = stack.last, last == char else {
             stack.append(char)
             continue
         }
         
-        if char == last {
-            stack.popLast()
-            continue
-        } 
-        
-        stack.append(char)
+        stack.popLast()
     }
 
     return stack.isEmpty ? 1 : 0
