@@ -9,7 +9,7 @@ func solution(_ s: String) -> Bool {
             continue
         }
         
-        guard let last = stack.last, last != ")" else { return false }
+        guard let last = stack.last, last == "(" else { return false }
         
         stack.popLast()
     }
