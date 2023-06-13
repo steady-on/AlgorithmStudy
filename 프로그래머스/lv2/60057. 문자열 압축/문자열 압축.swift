@@ -5,7 +5,7 @@ func solution(_ s:String) -> Int {
     
     var numberWithCount = [Int]()
     
-    for number in 1..<s.count {
+    for number in 1...(s.count/2) {
         var s = s
         var temp = String()
         var unit = String()
