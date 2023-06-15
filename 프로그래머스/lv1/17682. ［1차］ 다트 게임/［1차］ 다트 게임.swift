@@ -1,19 +1,19 @@
-enum Bonus: String {
+enum Bonus: Character {
     case s = "S"
     case d = "D"
     case t = "T"
 }
 
-enum Option: String {
+enum Option: Character {
     case star = "*"
     case hashtag = "#"
-    case none = ""
 }
 
 struct Chance {
     let point: Int
     let bonus: Bonus
-    var option: Option
+    var option: Option?
+    var isRevision: Bool = false
     
     var score: Int {
         var sum = 0
@@ -24,51 +24,47 @@ struct Chance {
         case .t: sum = point * point * point
         }
         
-        switch option {
-        case .star: sum *= 2
-        case .hashtag: sum *= (-1)
-        case .none: sum *= 1
+        if let option = self.option {
+            switch option {
+            case .star: sum *= 2
+            case .hashtag: sum *= (-1)
+            }
         }
+        
+        if isRevision { sum *= 2 }
         
         return sum
     }
 }
 
 func convertStringToChance(_ dartResult: String) -> [Chance] {
-    let points = dartResult.split { $0.isLetter || $0 == "*" || $0 == "#" }.compactMap { Int($0) }
+    let points = dartResult.split { $0.isNumber == false }.compactMap { Int($0) }
     let bonusAndOption = dartResult.split { $0.isNumber }
     var chances = [Chance]()
-    
+
     for (point, str) in zip(points, bonusAndOption) {
-        var bonus: Bonus
-        var option = Option.none
-        
-        if str.count == 1 {
-            bonus = Bonus(rawValue: String(str))!
-        } else {
-            bonus = Bonus(rawValue: String(str.first!))!
-            option = Option(rawValue: String(str.last!))!
-        }
-        
+        let bonus = Bonus(rawValue: str.first!)!
+        let option = Option(rawValue: str.last!)
+
         chances.append(Chance(point: point, bonus: bonus, option: option))
     }
 
     return chances
 }
 
-func makereadyScore(_ chances: [Chance]) -> [Int] {
-    var scores = chances.map { (score: $0.score, option: $0.option) }
+func reviceScore(_ chances: [Chance]) -> [Chance] {
+    var revicedChances = chances
     
-    for (index, element) in scores.enumerated() where index > 0 && element.option == .star {
-        scores[index-1].score *= 2
+    for index in 1...2 where chances[index].option == .star {
+        revicedChances[index-1].isRevision = true
     }
     
-    return scores.map { $0.score }
+    return revicedChances
 }
 
 func solution(_ dartResult:String) -> Int {
     let chances = convertStringToChance(dartResult)
-    let scores = makereadyScore(chances)
+    let revicedChances = reviceScore(chances)
 
-    return scores.reduce(0, +)
+    return revicedChances.reduce(0) { $0 + $1.score }
 }
