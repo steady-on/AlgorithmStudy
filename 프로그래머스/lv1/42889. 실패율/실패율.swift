@@ -1,5 +1,17 @@
 import Foundation
 
+func solution(_ N:Int, _ stages:[Int]) -> [Int] {
+    let arrivals = countArrivals(N, stages)
+    let clears = countClears(N, arrivals)
+    var failureRates = zip(arrivals, clears).map { a, c in c == 0 ? 0 : Double(a)/Double(c) }
+    failureRates.removeFirst()
+    failureRates.removeLast()
+    
+    let result = zip(1...N, failureRates).sorted { $0.1 > $1.1 }.map { $0.0 }
+    
+    return result
+}
+
 func countArrivals(_ n:Int, _ stages: [Int]) -> [Int] {
     var arrivals = Array(repeating: 0, count: n+2)
     
@@ -18,17 +30,4 @@ func countClears(_ n:Int, _ arrivals: [Int]) -> [Int] {
     }
     
     return clears
-}
-
-func solution(_ N:Int, _ stages:[Int]) -> [Int] {
-    let arrivals = countArrivals(N, stages)
-    let clears = countClears(N, arrivals)
-    var failureRates = zip(arrivals, clears).map { a, c in c == 0 ? 0 : Double(a)/Double(c) }
-    
-    failureRates.removeFirst()
-    failureRates.removeLast()
-    
-    let result = zip(1...N, failureRates).sorted { $0.1 > $1.1 }.map { $0.0 }
-    
-    return result
 }
