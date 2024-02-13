@@ -1,43 +1,26 @@
 import Foundation
 
 func solution(_ genres:[String], _ plays:[Int]) -> [Int] {
-    let sortedGenres = sortGenres(genres, plays)
-    let groupedGenres = groupGenres(genres, plays)
+    let groupedGenres = groupSum(genres, plays)
+    let sortedSum = groupedGenres.sorted { $0.sum > $1.sum }
     
-    var bestAlbum = [Int]() 
-
-    for genre in sortedGenres {
-        guard let songs = groupedGenres[genre] else { break }
-        
-        guard songs.count >= 2 else {
-            bestAlbum += songs
-            continue
-        }
-        
-        bestAlbum += Array(songs[..<2])
+    var bestAlbum = [Int]()
+    
+    for (_, songs) in sortedSum {
+        let sortedSongs = songs.sorted { plays[$0] > plays[$1] }
+        bestAlbum += sortedSongs.prefix(2)
     }
     
     return bestAlbum
 }
 
-func sortGenres(_ genres:[String], _ plays:[Int]) -> [String] {
-    var genrePlayDic = [String:Int]()
+func groupSum(_ genres:[String], _ plays:[Int]) -> [(sum:Int, songs:[Int])] {
+    var groupedSum = [String:(sum:Int, songs:[Int])]()
     
-    for (genre, play) in zip(genres, plays) {
-        genrePlayDic[genre, default: 0] += play
-    }
-        
-    return genrePlayDic.sorted { $0.value > $1.value }.map { $0.key }
-}
-
-func groupGenres(_ genres:[String], _ plays:[Int]) -> [String:[Int]] {
-    var genreIndexDic = [String:[Int]]()
-    
-    for (genre, index) in zip(genres, genres.indices) {
-        genreIndexDic[genre, default: [Int]()].append(index)
+    for (index, genre) in genres.enumerated() {
+        groupedSum[genre, default: (sum: 0, songs: [Int]())].sum += plays[index]
+        groupedSum[genre, default: (sum: 0, songs: [Int]())].songs.append(index)
     }
     
-    genreIndexDic = genreIndexDic.mapValues { $0.sorted { plays[$0] > plays[$1] } }
-    
-    return genreIndexDic
+    return Array(groupedSum.values)
 }
