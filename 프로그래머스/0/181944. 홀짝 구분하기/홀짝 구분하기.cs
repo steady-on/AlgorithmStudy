@@ -4,17 +4,12 @@ public class Example
 {
     public static void Main()
     {
-        string[] s = Console.ReadLine().Split(' ');
+        string input = Console.ReadLine();
 
-        int a = int.Parse(s[0]);
+        int a = int.Parse(input);
         
-        if (a % 2 == 0)
-        {
-            Console.WriteLine($"{a} is even");
-        }
-        else
-        {
-            Console.WriteLine($"{a} is odd");
-        }
+        string result = (a % 2 == 0) ? $"{a} is even" : $"{a} is odd";
+        
+        Console.WriteLine(result);
     }
 }
